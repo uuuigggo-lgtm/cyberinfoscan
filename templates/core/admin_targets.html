@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-4 text-warning">Admin – Manage Targets</h3>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Owner</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for target in targets %}
+    <tr>
+      <td>{{ target.name }}</td>
+      <td>{{ target.target_type }}</td>
+      <td>{{ target.owner.username }}</td>
+      <td>
+        <form method="post"
+              action="{% url 'core:admin_delete_target' target.id %}">
+          {% csrf_token %}
+          <button class="btn btn-sm btn-danger">
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'core:staff_panel' %}" class="btn btn-secondary mt-3">
+  Back
+</a>
+
+{% endblock %}

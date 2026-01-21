@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+
+    <div class="card shadow-sm">
+      <div class="card-header bg-dark text-white">
+        <h5 class="mb-0">Add New Target</h5>
+      </div>
+
+      <div class="card-body">
+
+        <form method="post">
+          {% csrf_token %}
+
+          <!-- Target Name -->
+          <div class="mb-3">
+            <label class="form-label">Target Name</label>
+            {{ form.name }}
+          </div>
+
+          <!-- Target Type -->
+          <div class="mb-3">
+            <label class="form-label">Target Type</label>
+            {{ form.target_type }}
+          </div>
+
+          <!-- Buttons -->
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'targets:list' %}" class="btn btn-secondary">
+              Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+              Add Target
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

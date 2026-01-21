@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-4">Dashboard</h3>
+
+<div class="row text-center">
+  <div class="col-md-6">
+    <div class="card border-primary mb-3">
+      <div class="card-body">
+        <h5>Total Targets</h5>
+        <h2>{{ targets_count }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card border-success mb-3">
+      <div class="card-body">
+        <h5>Total Scans</h5>
+        <h2>{{ scans_count }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

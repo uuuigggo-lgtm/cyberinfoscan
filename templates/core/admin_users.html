@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class="mb-4 text-warning">User Management</h3>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Username</th>
+      <th>Status</th>
+      <th>Targets</th>
+      <th>Scans</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.username }}</td>
+
+      <td>
+        {% if user.is_active %}
+          <span class="badge bg-success">Active</span>
+        {% else %}
+          <span class="badge bg-danger">Disabled</span>
+        {% endif %}
+      </td>
+
+      <td>{{ user.target_set.count }}</td>
+      <td>{{ user.scantask_set.count }}</td>
+
+      <td>
+          {% if not user.is_superuser %}
+
+                 <!-- Toggle Active -->
+            <form method="post"
+                action="{% url 'core:toggle_user' user.id %}"
+                style="display:inline;">
+                    {% csrf_token %}
+                 <button class="btn btn-sm btn-warning">
+                      Toggle
+                  </button>
+            </form>
+
+           {% if user.is_staff %}
+                <!-- Demote -->
+               <form method="post"
+                 action="{% url 'core:demote_user' user.id %}"
+                  style="display:inline;">
+                       {% csrf_token %}
+                   <button class="btn btn-sm btn-danger">
+                        Remove Admin
+                    </button>
+                </form>
+                <span class="badge bg-info ms-2">Admin</span>
+              {% else %}
+                      <!-- Promote -->
+               <form method="post"
+                     action="{% url 'core:promote_user' user.id %}"
+                      style="display:inline;">
+                        {% csrf_token %}
+                       <button class="btn btn-sm btn-success">
+                          Make Admin
+                        </button>
+                </form>
+              {% endif %}
+
+          {% else %}
+             <span class="badge bg-secondary">Superuser</span>
+          {% endif %}
+      </td>
+
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="/admin-panel/" class="btn btn-secondary mt-3">Back</a>
+
+{% endblock %}

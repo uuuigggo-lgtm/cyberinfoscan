@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Edit Target</h3>
+
+<form method="post">
+  {% csrf_token %}
+  <input class="form-control mb-3" type="text" name="name" value="{{ target.name }}">
+  <select class="form-select mb-3" name="target_type">
+    <option value="domain" {% if target.target_type == 'domain' %}selected{% endif %}>Domain</option>
+    <option value="ip" {% if target.target_type == 'ip' %}selected{% endif %}>IP</option>
+  </select>
+
+  <button class="btn btn-warning">Update</button>
+</form>
+{% endblock %}

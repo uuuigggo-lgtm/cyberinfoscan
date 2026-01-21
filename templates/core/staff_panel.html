@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="mb-4 text-info">Staff Panel</h3>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Total Targets</h5>
+        <p class="display-6">{{ targets_count }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Total Scans</h5>
+        <p class="display-6">{{ scans_count }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Admin Logs</h5>
+        <p class="display-6">{{ logs_count }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="my-4">
+
+<a href="{% url 'core:admin_targets' %}" class="btn btn-outline-primary me-2">
+  Manage Targets
+</a>
+
+<a href="{% url 'core:admin_scans' %}" class="btn btn-outline-primary me-2">
+  Manage Scans
+</a>
+
+<a href="{% url 'core:admin_logs' %}" class="btn btn-outline-secondary">
+  View Logs
+</a>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between mb-3">
+  <h3>Targets</h3>
+  <a class="btn btn-primary" href="{% url 'targets:add' %}">Add Target</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in targets %}
+    <tr>
+      <td>{{ t.name }}</td>
+      <td>{{ t.target_type }}</td>
+      <td>
+        <a class="btn btn-sm btn-warning" href="{% url 'targets:edit' t.id %}">Edit</a>
+        <a class="btn btn-sm btn-danger" href="{% url 'targets:delete' t.id %}">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">No targets</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

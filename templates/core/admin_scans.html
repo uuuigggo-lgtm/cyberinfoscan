@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-4 text-warning">Admin – Manage Scans</h3>
+
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>User</th>
+      <th>Target</th>
+      <th>Tool</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for scan in scans %}
+    <tr>
+      <td>{{ scan.user.username }}</td>
+      <td>{{ scan.target.name }}</td>
+      <td>{{ scan.tool.name }}</td>
+      <td>{{ scan.status }}</td>
+      <td>
+        <form method="post"
+              action="{% url 'core:admin_delete_scan' scan.id %}">
+          {% csrf_token %}
+          <button class="btn btn-sm btn-danger">
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'core:staff_panel' %}" class="btn btn-secondary mt-3">
+  Back
+</a>
+
+{% endblock %}
